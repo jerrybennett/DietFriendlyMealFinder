@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :recipes
-  resources :users
   namespace :api do
     namespace :v1 do
-      get 'users/name'
+      resources :recipes
+      resources :users
     end
   end
 
