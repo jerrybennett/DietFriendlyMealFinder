@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(version: 20180301202204) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "title"
-    t.string "publisher"
-    t.string "publisher_url"
-    t.string "social_rank"
+    t.string "attribution"
+    t.string "source"
+    t.integer "rating"
+    t.string "total_time"
     t.string "image_url"
     t.string "ingredients", default: [], array: true
     t.integer "user_id"

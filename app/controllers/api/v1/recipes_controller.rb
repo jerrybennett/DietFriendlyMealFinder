@@ -4,11 +4,6 @@ class Api::V1::RecipesController < ApplicationController
   def index
     recipes = Recipe.all
     render json: recipes, status: 200
-    response = RestClient::Request.execute(
-      method: :get,
-      url: 'http://food2fork.com/api/search?key=caa2419eda2201f5540d9b478531a912&q=chicken%20garlic',
-      headers: {api_key: 'caa2419eda2201f5540d9b478531a912'}
-    )
   end
 
   def create
@@ -33,7 +28,7 @@ class Api::V1::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.permit(:title, :publisher, :publisher_url, :image_url, :social_rank, :ingredients, :user_id)
+    params.permit(:title, :attribution, :source, :image_url, :rating, :total_time, :ingredients, :user_id)
   end
 
   def set_recipe
