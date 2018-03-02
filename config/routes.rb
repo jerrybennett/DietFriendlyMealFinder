@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :recipes
       resources :users
+      resources :recipe_ingredients
+      resources :ingredients
     end
   end
 

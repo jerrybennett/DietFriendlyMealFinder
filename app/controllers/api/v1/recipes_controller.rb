@@ -8,6 +8,10 @@ class Api::V1::RecipesController < ApplicationController
 
   def create
     recipe = Recipe.create(recipe_params)
+    params[:ingredients].each do |i|
+      ingredient = Ingredient.create(name: i)
+      ingredient.recipe << recipe
+    end
     render json: recipe, status: 201
   end
 

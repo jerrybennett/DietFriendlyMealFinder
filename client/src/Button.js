@@ -24,7 +24,7 @@ export default class Button extends React.Component {
           ingredients: res.ingredientLines
         })
       })
-      .then(res => res.json()))
+      .then(res => res.json())).then(console.log)
 
   render() {
     return (
