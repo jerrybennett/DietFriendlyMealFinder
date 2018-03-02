@@ -8,7 +8,23 @@ const SEARCH = `http://api.yummly.com/v1/api/recipe/${"Caramelized-Tofu-2246400"
 // Caramelized-Tofu-2246400
 export default class Button extends React.Component {
 
-  getRecipe = () => fetch(SEARCH).then(res => res.json()).then(console.log)
+  getRecipe = () => fetch(SEARCH).then(res => res.json()).then(res => fetch(`http://localhost:3000/api/v1/recipes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          title: res.name,
+          attribution: res.attribution.html,
+          source: res.source.sourceRecipeUrl,
+          rating: res.rating,
+          total_time: res.totalTime,
+          image_url: res.images[0].hostedLargeUrl,
+          ingredients: res.ingredientLines
+        })
+      })
+      .then(res => res.json()))
 
   render() {
     return (
