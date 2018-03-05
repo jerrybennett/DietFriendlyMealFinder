@@ -4,11 +4,7 @@ import {Form, Checkbox} from 'semantic-ui-react'
 const Search = (props) => {
 
   const addAllergy = (e) => {
-    // if(e.target.parentNode.className !== 'ui checkbox') {
-    //   props.handleChecked('')
-    // } else if (e.target.parentNode.className !== 'ui checked checkbox') {
-      props.handleChecked(e.target.parentNode.children[0].value)
-    // }
+    props.handleChecked(e.target.parentNode.children[0].value)
   }
 
   return (

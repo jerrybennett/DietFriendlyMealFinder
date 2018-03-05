@@ -1,6 +1,5 @@
 import React from 'react';
 import { Image, Card, Rating, Icon } from 'semantic-ui-react'
-import Detail from'./Detail'
 
 const RecipeItem = (props) => {
   const clickCard = () => {
