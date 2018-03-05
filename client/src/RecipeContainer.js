@@ -4,7 +4,7 @@ import { Container, Grid, Image, Visibility } from 'semantic-ui-react'
 import RecipeItem from './RecipeItem'
 import Recipe from './Recipe'
 import Search from './Search'
-import ShoppingList from './ShoppingList'
+// import ShoppingList from './ShoppingList'
 
 const API_ID = `8379c306`
 const API_KEY = `
@@ -18,6 +18,7 @@ export default class RecipeContainer extends React.Component {
     recipes: [],
     currentRecipe:[],
     query: 'chocolate',
+    showDetail: true,
     allergies: []
   }
 
@@ -99,7 +100,7 @@ export default class RecipeContainer extends React.Component {
     return (
       <Container>
         <Search handleChecked={this.handleChecked} allergy={this.state.allergies} handleSubmit={this.handleSubmit} handleQuery={this.handleQuery} query={this.state.query} />
-        {/* <ShoppingList /> */}
+        {/* <ShoppingList recipe={this.state.currentRecipe}/> */}
         <Recipe recipe={this.state.currentRecipe}/>
         <Grid doubling columns={5}>
           {this.state.recipes.map(recipe =>

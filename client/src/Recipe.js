@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Rating, Checkbox } from 'semantic-ui-react'
+import { Container, Rating, Checkbox, Button, Icon } from 'semantic-ui-react'
 import ShoppingList from './ShoppingList'
 
 export default class Recipe extends React.Component {
@@ -23,20 +23,40 @@ export default class Recipe extends React.Component {
     // }
   // }
 
-  handleChecked = (e) => {
-    let food = e.target.parentNode.children[0].value
-    if (this.state.ingredients.includes(food)){
+  handleAdd = (e) => {
+    let food = e.target.parentNode.parentNode.innerText
+    if(!this.state.ingredients.includes(food))
+    this.setState({
+      ingredients: [...this.state.ingredients, food]
+    }, () => console.log(this.state.ingredients))
+  }
+
+  handleRemove = (e) => {
+    let food = e.target.parentNode.parentNode.innerText
+
       let arr = this.state.ingredients
       let index = arr.indexOf(food)
       arr.splice(index, 1);
       this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
-      e.target.parentNode.className = 'ui checked fitted checkbox'
-    } else {
-      this.setState({
-        ingredients: [...this.state.ingredients, food]
-      }, () => console.log(this.state.ingredients))
-    }
+
   }
+  //
+  // handleChecked = (e) => {
+  //   // console.log(e.target.parentNode.parentNode.innerText)
+  //   let food = e.target.parentNode.parentNode.innerText
+  //   if (this.state.ingredients.includes(food)){
+  //     let arr = this.state.ingredients
+  //     let index = arr.indexOf(food)
+  //     arr.splice(index, 1);
+  //     this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
+  //     // e.target.parentNode.className = 'ui checked fitted checkbox'
+  //   } else {
+  //     if(!this.state.ingredients.includes(food))
+  //     this.setState({
+  //       ingredients: [...this.state.ingredients, food]
+  //     }, () => console.log(this.state.ingredients))
+  //   }
+  // }
 
   displayRecipe = (props) => {
     const recipe = this.props.recipe
@@ -46,7 +66,15 @@ export default class Recipe extends React.Component {
           <h4>{recipe.title}</h4>
           <p>{recipe.source}</p>
           <ul>
-            {recipe.ingredients.map(i => <Container><li style={{listStyle: 'none'}}><Checkbox onChange={this.handleChecked} value={i.name} control='input' type='checkbox' /> {i.name}</li></Container>)}
+            {recipe.ingredients.map(i =>
+              <Container>
+                <li value={i.name} style={{listStyle: 'none'}}>
+                  <Button onClick={this.handleAdd} icon>
+                    <Icon name='unordered list' />
+                  </Button>
+                  {i.name}
+                </li>
+              </Container>)}
           </ul>
           <Rating disabled icon='star' defaultRating={recipe.rating} maxRating={5} />
           <div dangerouslySetInnerHTML={{__html: recipe.attribution}} />
@@ -55,10 +83,9 @@ export default class Recipe extends React.Component {
     }
   }
   render(){
-
     return (
       <div>
-        <ShoppingList addIngredient={this.addIngredient} handleChecked={this.handleChecked} ingredients={this.state.ingredients}/>
+        <ShoppingList addIngredient={this.addIngredient} handleRemove={this.handleRemove} ingredients={this.state.ingredients}/>
         {this.displayRecipe()}
       </div>
     );

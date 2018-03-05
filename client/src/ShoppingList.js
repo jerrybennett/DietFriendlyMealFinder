@@ -1,13 +1,17 @@
 import React from 'react';
-import { Container, Checkbox } from 'semantic-ui-react'
+import { Container, Checkbox, Button, Icon } from 'semantic-ui-react'
 
 const ShoppingList = (props) => {
-  console.log(props)
+
   const ingList = () => {
-    if (props.ingredients) {
+    if (props.ingredients.length > 0) {
       return props.ingredients.map(i =>
           <Container>
-            <li style={{listStyle: 'none'}}><Checkbox onChange={props.handleChecked} value={i} control='input' type='checkbox' /> {i}</li>
+            <li style={{listStyle: 'none'}}>
+              <Button onClick={props.handleRemove} icon>
+                <Icon name='in cart' />
+              </Button>
+              {i}</li>
           </Container>
 
       );
