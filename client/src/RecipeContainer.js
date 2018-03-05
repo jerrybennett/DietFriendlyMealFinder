@@ -18,7 +18,6 @@ export default class RecipeContainer extends React.Component {
     recipes: [],
     currentRecipe:[],
     query: 'chocolate',
-    showDetail: true,
     allergies: []
   }
 
@@ -100,7 +99,7 @@ export default class RecipeContainer extends React.Component {
     return (
       <Container>
         <Search handleChecked={this.handleChecked} allergy={this.state.allergies} handleSubmit={this.handleSubmit} handleQuery={this.handleQuery} query={this.state.query} />
-        <ShoppingList />
+        {/* <ShoppingList /> */}
         <Recipe recipe={this.state.currentRecipe}/>
         <Grid doubling columns={5}>
           {this.state.recipes.map(recipe =>

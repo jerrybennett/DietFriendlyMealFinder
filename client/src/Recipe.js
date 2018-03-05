@@ -8,21 +8,35 @@ export default class Recipe extends React.Component {
     ingredients: []
   }
 
-  addIngredient = (food) => {
+  // addIngredient = (food, e) => {
     // console.log(e.target.parentNode.children[0].value)
+    // if (this.state.ingredients.includes(food)){
+    //   let arr = this.state.ingredients
+    //   let index = arr.indexOf(food)
+    //   arr.splice(index, 1);
+    //   this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
+    //   e.target.parentNode.className = 'ui checked fitted checkbox'
+    // } else {
+    //   this.setState({
+    //     ingredients: [...this.state.ingredients, food]
+    //   }, () => console.log(this.state.ingredients))
+    // }
+  // }
+
+  handleChecked = (e) => {
+    let food = e.target.parentNode.children[0].value
     if (this.state.ingredients.includes(food)){
       let arr = this.state.ingredients
       let index = arr.indexOf(food)
       arr.splice(index, 1);
       this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
+      e.target.parentNode.className = 'ui checked fitted checkbox'
     } else {
       this.setState({
         ingredients: [...this.state.ingredients, food]
       }, () => console.log(this.state.ingredients))
     }
   }
-
-  handleChecked = (e) => this.addIngredient(e.target.parentNode.children[0].value)
 
   displayRecipe = (props) => {
     const recipe = this.props.recipe
@@ -41,9 +55,10 @@ export default class Recipe extends React.Component {
     }
   }
   render(){
-    <ShoppingList handleChecked={this.handleChecked} ingredients={this.state.ingredients}/>
+
     return (
       <div>
+        <ShoppingList addIngredient={this.addIngredient} handleChecked={this.handleChecked} ingredients={this.state.ingredients}/>
         {this.displayRecipe()}
       </div>
     );
