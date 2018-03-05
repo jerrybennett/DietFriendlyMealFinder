@@ -1,0 +1,35 @@
+import React from 'react';
+import { Image, Card, Rating, Icon } from 'semantic-ui-react'
+import Detail from'./Detail'
+
+const RecipeItem = (props) => {
+  const clickCard = () => {
+    props.handleClick(props.recipe)
+  }
+  return (
+    <Card onClick={clickCard} recipe={props.recipe}>
+      <Image src={props.recipe.images[0].hostedLargeUrl}/>
+      <Card.Content>
+        <Card.Header>
+          {props.recipe.name}
+        </Card.Header>
+        <Card.Meta>
+          <span className='date'>
+            <a href={props.recipe.source.sourceRecipeUrl
+            }>{props.recipe.source.sourceDisplayName}</a>
+          </span>
+        </Card.Meta>
+        <Card.Description>
+          <Rating icon='star' defaultRating={props.recipe.rating} maxRating={5} />
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <a>
+          <Icon name='user' />
+          22 Friends
+        </a>
+      </Card.Content>
+    </Card>
+  );
+}
+export default RecipeItem

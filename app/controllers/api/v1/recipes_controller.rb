@@ -7,13 +7,21 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def create
-    recipe = Recipe.create(recipe_params)
-    params[:ingredients].each do |i|
-      ingredient = Ingredient.create(name: i)
-      ingredient.recipe << recipe
-    end
-    render json: recipe, status: 201
-  end
+   recipe = Recipe.find_or_create_by(recipe_params)
+   # Ultimate goal:
+   # user = User.find(params[:user_id])
+
+   # quick fix:
+   user=User.all.first
+   recipe.user = user
+   params[:ingredients].each do |i|
+     ingredient = Ingredient.find_or_create_by(name: i)
+     if !ingredient.recipes.include?(recipe)
+         ingredient.recipes << recipe
+       end
+   end
+   render json: recipe, status: 201
+ end
 
   def update
     @recipe.update(recipe_params)
