@@ -8,21 +8,6 @@ export default class Recipe extends React.Component {
     ingredients: []
   }
 
-  // addIngredient = (food, e) => {
-    // console.log(e.target.parentNode.children[0].value)
-    // if (this.state.ingredients.includes(food)){
-    //   let arr = this.state.ingredients
-    //   let index = arr.indexOf(food)
-    //   arr.splice(index, 1);
-    //   this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
-    //   e.target.parentNode.className = 'ui checked fitted checkbox'
-    // } else {
-    //   this.setState({
-    //     ingredients: [...this.state.ingredients, food]
-    //   }, () => console.log(this.state.ingredients))
-    // }
-  // }
-
   handleAdd = (e) => {
     let food = e.target.parentNode.parentNode.innerText
     if(!this.state.ingredients.includes(food))
@@ -33,30 +18,11 @@ export default class Recipe extends React.Component {
 
   handleRemove = (e) => {
     let food = e.target.parentNode.parentNode.innerText
-
-      let arr = this.state.ingredients
-      let index = arr.indexOf(food)
-      arr.splice(index, 1);
-      this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
-
+    let arr = this.state.ingredients
+    let index = arr.indexOf(food)
+    arr.splice(index, 1);
+    this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
   }
-  //
-  // handleChecked = (e) => {
-  //   // console.log(e.target.parentNode.parentNode.innerText)
-  //   let food = e.target.parentNode.parentNode.innerText
-  //   if (this.state.ingredients.includes(food)){
-  //     let arr = this.state.ingredients
-  //     let index = arr.indexOf(food)
-  //     arr.splice(index, 1);
-  //     this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
-  //     // e.target.parentNode.className = 'ui checked fitted checkbox'
-  //   } else {
-  //     if(!this.state.ingredients.includes(food))
-  //     this.setState({
-  //       ingredients: [...this.state.ingredients, food]
-  //     }, () => console.log(this.state.ingredients))
-  //   }
-  // }
 
   displayRecipe = (props) => {
     const recipe = this.props.recipe
