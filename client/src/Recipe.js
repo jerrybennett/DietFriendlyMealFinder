@@ -30,25 +30,30 @@ export default class Recipe extends React.Component {
     const recipe = this.props.recipe
     if(recipe.length !== 0) {
       return (
-        <Container textAlign='left'>
-          <h4>{recipe.title}</h4>
-          <p>{recipe.source}</p>
+        <Container className='recipe' textAlign='left'>
+          <h2>{recipe.title}</h2>
           <ul>
             {recipe.ingredients.map(i =>
               <Container>
-                <li value={i.name} style={{listStyle: 'none'}}>
+                <li className='inList' value={i.name} style={{listStyle: 'none'}}>
                   <Button onClick={this.handleAdd} icon>
-                    <Icon name='unordered list' />
+                    <Icon name='plus' />
                   </Button>
                   {i.name}
                 </li>
               </Container>)}
           </ul>
-          <Button onClick={this.handleDo} icon>
-            {/* <Icon name='unordered list' /> */}
+          {/* <Button onClick={this.handleDo} icon>
+            <Icon name='plus' />
             Add to My List
-          </Button>
-          <Rating disabled icon='star' defaultRating={recipe.rating} maxRating={5} />
+          </Button> */}
+          <Rating
+            disabled
+            icon='star'
+            defaultRating={recipe.rating}
+            maxRating={5}
+          />
+          <p>{recipe.source}</p>
           <div dangerouslySetInnerHTML={{__html: recipe.attribution}} />
         </Container>
       )
@@ -56,8 +61,10 @@ export default class Recipe extends React.Component {
   }
   render(){
     return (
-      <div>
-        <ShoppingList addIngredient={this.addIngredient} handleRemove={this.handleRemove} ingredients={this.state.ingredients}/>
+      <div className='recipeCont'>
+        <ShoppingList
+          addIngredient={this.addIngredient} handleRemove={this.handleRemove} ingredients={this.state.ingredients}
+        />
         {this.displayRecipe()}
       </div>
     );

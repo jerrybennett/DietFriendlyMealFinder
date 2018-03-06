@@ -12,20 +12,15 @@ const RecipeItem = (props) => {
         <Card.Header>
           {props.recipe.name}
         </Card.Header>
-        <Card.Meta>
-          <span className='date'>
-            <a href={props.recipe.source.sourceRecipeUrl
-            }>{props.recipe.source.sourceDisplayName}</a>
-          </span>
-        </Card.Meta>
         <Card.Description>
           <Rating icon='star' defaultRating={props.recipe.rating} maxRating={5} />
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <a>
-          <Icon name='user' />
-          22 Friends
+        <a href={props.recipe.source.sourceRecipeUrl
+        }>
+          <Icon name='world' />
+          {props.recipe.source.sourceDisplayName}
         </a>
       </Card.Content>
     </Card>

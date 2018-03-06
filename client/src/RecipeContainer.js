@@ -90,7 +90,7 @@ export default class RecipeContainer extends React.Component {
         image_url:recipe.images[0].hostedLargeUrl,
         ingredients:recipe.ingredientLines
       })
-  }).then(res => res.json()).then(res => this.setState({currentRecipe: res}))
+  }).then(res => res.json()).then(res => this.setState({currentRecipe: res}, () => console.log(res)))
 
   handleQuery = (e) => {
     this.setState({query: e.target.value})
@@ -105,24 +105,12 @@ export default class RecipeContainer extends React.Component {
     this.getRecipe()
   }
 
-  // handleChecked = (allergy) => {
-  //   if (this.state.allergies.includes(allergy)){
-  //     let arr = this.state.allergies
-  //     let index = arr.indexOf(allergy)
-  //     arr.splice(index, 1);
-  //     this.setState({allergies: arr }, () => console.log(this.state.allergies));
-  //   } else {
-  //     this.setState({
-  //       allergies: [...this.state.allergies, allergy]
-  //     }, () => console.log(this.state.allergies))
-  //   }
-  // }
-
   handleAddToMyList = (recipe) => {
-    if(!this.state.myRecipes.includes(recipe)) {
-      this.setState({
-        myRecipes: [...this.state.myRecipes, recipe]
-      })
+    let myRecipes = this.state.myRecipes
+    if(!myRecipes.includes(recipe)) {
+      this.setState(prevState => ({
+        myRecipes: [...prevState.myRecipes, recipe]
+      }))
     }
   }
 
@@ -135,7 +123,7 @@ export default class RecipeContainer extends React.Component {
     console.log(this.state.myRecipes)
 
     return (
-      <Container>
+      <div>
         {/* <NavBar /> */}
         <Search
           // handleChecked={this.handleChecked}
@@ -150,14 +138,14 @@ export default class RecipeContainer extends React.Component {
           dietOptions={this.state.dietOptions}
         />
         <Recipe handleAddToMyList={this.handleAddToMyList} recipe={this.state.currentRecipe}/>
-        <Grid doubling columns={5}>
+        <Grid container doubling columns={5}>
           {this.state.recipes.map(recipe =>
             <Grid.Column>
               <RecipeItem handleClick={this.handleClick} recipe={recipe} />
             </Grid.Column>)
           }
         </Grid>
-      </Container>
+      </div>
     );
   }
 }

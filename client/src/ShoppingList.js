@@ -7,7 +7,7 @@ const ShoppingList = (props) => {
     if (props.ingredients.length > 0) {
       return props.ingredients.map(i =>
           <Container textAlign='left'>
-            <li style={{listStyle: 'none'}}>
+            <li className='inList' style={{listStyle: 'none'}}>
               <Button onClick={props.handleRemove} icon>
                 <Icon name='in cart' />
               </Button>

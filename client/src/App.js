@@ -8,12 +8,11 @@ import RecipeContainer from './RecipeContainer'
 class App extends Component {
   render() {
     return (
-      <Container padded="true" className="App">
-        <Header padded="true" as='h2'>Recipes App</Header>
+      <div padded="true" className="App">
+        <Header ui valigned middle className="Header" padded="true" as='h2'>Recipes App</Header>
         <RecipeContainer />
-      </Container>
+      </div>
     );
   }
 }
-
 export default App;
