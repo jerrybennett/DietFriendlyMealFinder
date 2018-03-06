@@ -103,35 +103,28 @@ export default class RecipeContainer extends React.Component {
       currentRecipe:[]
     })
     this.getRecipe()
-    // console.log('submitted!')
   }
 
-  handleChecked = (allergy) => {
-    if (this.state.allergies.includes(allergy)){
-      let arr = this.state.allergies
-      let index = arr.indexOf(allergy)
-      arr.splice(index, 1);
-      this.setState({allergies: arr }, () => console.log(this.state.allergies));
-    } else {
-      this.setState({
-        allergies: [...this.state.allergies, allergy]
-      }, () => console.log(this.state.allergies))
-    }
-  }
+  // handleChecked = (allergy) => {
+  //   if (this.state.allergies.includes(allergy)){
+  //     let arr = this.state.allergies
+  //     let index = arr.indexOf(allergy)
+  //     arr.splice(index, 1);
+  //     this.setState({allergies: arr }, () => console.log(this.state.allergies));
+  //   } else {
+  //     this.setState({
+  //       allergies: [...this.state.allergies, allergy]
+  //     }, () => console.log(this.state.allergies))
+  //   }
+  // }
 
   handleAddToMyList = (recipe) => {
-    console.log(recipe)
-    console.log(this.state.myRecipes)
-    if(this.state.myRecipes.includes(!recipe.id)){
-    this.setState({
-      myRecipes: [...this.state.myRecipes, recipe]
-    })
+    if(!this.state.myRecipes.includes(recipe)) {
+      this.setState({
+        myRecipes: [...this.state.myRecipes, recipe]
+      })
+    }
   }
-  }
-
-  // getIngredients = () => {
-  //   fetch(`http://api.yummly.com/v1/api/metadata/ingredient?_app_id=8379c306&_app_key=6bd319c2daf886afd64b5a70e9d55e1f`).then(res => res.json()).then(console.log)
-  // }
 
   render() {
     // console.log(this.state.recipes)
@@ -139,6 +132,7 @@ export default class RecipeContainer extends React.Component {
     // console.log(this.state.query)
     console.log(this.state.allergies)
     console.log(this.state.diet)
+    console.log(this.state.myRecipes)
 
     return (
       <Container>

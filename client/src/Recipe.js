@@ -24,7 +24,7 @@ export default class Recipe extends React.Component {
     this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
   }
 
-  handleDo = (r) => this.props.handleAddToMyList(this.props.recipe)
+  handleDo = () => this.props.handleAddToMyList(this.props.recipe)
 
   displayRecipe = (props) => {
     const recipe = this.props.recipe
