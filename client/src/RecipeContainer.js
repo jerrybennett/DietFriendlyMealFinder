@@ -21,6 +21,7 @@ export default class RecipeContainer extends React.Component {
     showDetail: true,
     allergies: [],
     diet: [],
+    myRecipes: [],
     allergyOptions: [
       { key: '394^Peanut-Free', value: '394^Peanut-Free', text: 'Peanut' },
       { key: '397^Egg-Free', value: '397^Egg-Free', text: 'Eggs' },
@@ -42,7 +43,6 @@ export default class RecipeContainer extends React.Component {
 
   componentDidMount(){
     this.getRecipe()
-    this.getIngredients()
   }
 
   handleAllergy = (e, {value}) => this.setState({allergies: value})
@@ -119,9 +119,19 @@ export default class RecipeContainer extends React.Component {
     }
   }
 
-  getIngredients = () => {
-    fetch(`http://api.yummly.com/v1/api/metadata/ingredient?_app_id=8379c306&_app_key=6bd319c2daf886afd64b5a70e9d55e1f`).then(res => res.json()).then(console.log)
+  handleAddToMyList = (recipe) => {
+    console.log(recipe)
+    console.log(this.state.myRecipes)
+    if(this.state.myRecipes.includes(!recipe.id)){
+    this.setState({
+      myRecipes: [...this.state.myRecipes, recipe]
+    })
   }
+  }
+
+  // getIngredients = () => {
+  //   fetch(`http://api.yummly.com/v1/api/metadata/ingredient?_app_id=8379c306&_app_key=6bd319c2daf886afd64b5a70e9d55e1f`).then(res => res.json()).then(console.log)
+  // }
 
   render() {
     // console.log(this.state.recipes)
@@ -145,7 +155,7 @@ export default class RecipeContainer extends React.Component {
           handleDiet={this.handleDiet}
           dietOptions={this.state.dietOptions}
         />
-        <Recipe recipe={this.state.currentRecipe}/>
+        <Recipe handleAddToMyList={this.handleAddToMyList} recipe={this.state.currentRecipe}/>
         <Grid doubling columns={5}>
           {this.state.recipes.map(recipe =>
             <Grid.Column>

@@ -24,6 +24,8 @@ export default class Recipe extends React.Component {
     this.setState({ingredients: arr }, () => console.log(this.state.ingredients));
   }
 
+  handleDo = (r) => this.props.handleAddToMyList(this.props.recipe)
+
   displayRecipe = (props) => {
     const recipe = this.props.recipe
     if(recipe.length !== 0) {
@@ -42,6 +44,10 @@ export default class Recipe extends React.Component {
                 </li>
               </Container>)}
           </ul>
+          <Button onClick={this.handleDo} icon>
+            {/* <Icon name='unordered list' /> */}
+            Add to My List
+          </Button>
           <Rating disabled icon='star' defaultRating={recipe.rating} maxRating={5} />
           <div dangerouslySetInnerHTML={{__html: recipe.attribution}} />
         </Container>
